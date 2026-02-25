@@ -195,3 +195,4 @@ with tab2:
     st.markdown(f"- **Kg de explosivo / metro de avance:** {round(kg_m_avance, 2)} Kg/m &nbsp;&nbsp;&nbsp;&nbsp; $\\rightarrow \\quad \\frac{{\\text{{Carga Total (Kg)}}}}{{\\text{{Avance Real (Av)}}}}$")
     st.markdown(f"- **Metros perforados / m³ derribado:** {round(m_perf_m3_derribado, 2)} m/m³ &nbsp;&nbsp;&nbsp;&nbsp; $\\rightarrow \\quad \\frac{{N \\cdot L}}{{V_r}}$")
     st.markdown(f"- **Factor de Potencia Real:** {round(factor_potencia, 2)} Kg/m³ &nbsp;&nbsp;&nbsp;&nbsp; $\\rightarrow \\quad \\frac{{\\text{{Carga Total (Kg)}}}}{{V_r}}$")
+
