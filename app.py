@@ -110,16 +110,21 @@ with tab1:
 
     st.divider()
 
-    # --- NUEVA SECCIÓN DE TEORÍA DE DISTRIBUCIÓN ---
+    # --- NUEVA SECCIÓN DE TEORÍA DE DISTRIBUCIÓN CON FÓRMULAS ---
     st.header("Teoría de Distribución de Taladros")
-    st.write("La malla visualizada en este diseño está fundamentada en el método de **Corte Quemado (Burn Cut)** con frentes paralelos. Esta distribución geométrica asegura la creación secuencial de caras libres hacia el centro de la labor.")
+    st.write("La malla visualizada en este diseño está fundamentada en el método de **Corte Quemado (Burn Cut)** con frentes paralelos. La distribución sigue un espaciamiento geométrico empírico, asignando una distancia ideal entre taladros según la zona de la labor:")
     
     st.markdown("""
-    * **Taladro de Alivio (Vacío central):** Es el corazón de la malla. Se perfora pero no se carga con explosivo. Su único propósito es proporcionar la primera "cara libre" para que la roca fragmentada por los arranques tenga hacia dónde expandirse.
-    * **Arranques (1) y Ayudas (2):** Siguen un patrón de expansión geométrica progresiva alternando formas **(Rombo interior $\\rightarrow$ Cuadrado medio $\\rightarrow$ Rombo exterior)**. Esta secuencia radial simétrica garantiza que la cavidad central se agrande capa por capa sin "soplar" o proyectar la roca excesivamente hacia atrás, optimizando el uso de la energía del explosivo.
-    * **Arrastres (3):** Situados en el piso de la labor. Son los últimos en detonar (o penúltimos). Requieren mayor concentración de carga ya que deben vencer la gravedad para levantar y empujar todo el material derribado (muck pile) hacia adelante.
-    * **Cuadradores (4):** Perforados a lo largo de los hastiales (paredes). Definen el perfil lateral de la galería y ayudan a mantener la estabilidad de los flancos.
-    * **Corona (5):** Perforados en el techo (bóveda). Llevan la menor carga explosiva de toda la malla para implementar el principio de voladura controlada (Smooth Blasting). Esto minimiza la sobre-excavación (overbreak) y previene la caída de rocas, garantizando un techo seguro y estable.
+    * **Taladro de Alivio (Vacío central):** Es el corazón de la malla. Se perfora pero no se carga con explosivo para proporcionar la primera "cara libre".
+    * **Arranques (1):** Valor fijo programado en **4 taladros**. Forman el rombo interior inicial alrededor del alivio.
+    * **Arrastres (3):** Situados en el piso. Asumen un espaciamiento ideal de **0.6m**.
+      $$T_{arrastres} = \\text{Redondear}\\left(\\frac{base}{0.6}\\right)$$
+    * **Cuadradores (4):** Perforados a lo largo de los hastiales (paredes). Asumen un espaciamiento de **0.6m**. Se multiplica por 2 (ambas paredes).
+      $$T_{cuadradores} = \\text{Redondear}\\left(\\frac{altura/2}{0.6}\\right) \\times 2$$
+    * **Corona (5):** Techo de la labor. Llevan un espaciamiento menor de **0.5m** para implementar voladura controlada (*Smooth Blasting*), asegurando la estabilidad del techo.
+      $$T_{corona} = \\text{Redondear}\\left(\\frac{\\pi \cdot r}{0.5}\\right)$$
+    * **Ayudas (2):** Siguen un patrón de expansión progresiva alternando formas (Rombo $\\rightarrow$ Cuadrado). Se calculan por **diferencia** respecto al total de taladros ($N$).
+      $$T_{ayudas} = N - (T_{arranques} + T_{arrastres} + T_{cuadradores} + T_{corona})$$
     """)
 
 with tab2:
